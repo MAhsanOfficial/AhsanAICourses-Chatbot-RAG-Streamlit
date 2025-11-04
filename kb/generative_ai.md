@@ -1,6 +1,6 @@
 # Generative AI
 
-Duration: 6 weeks
+Duration: 3 Month
 Prerequisites: Python, basic ML
 
 Modules:

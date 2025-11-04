@@ -45,7 +45,7 @@ st.markdown("""
     }
 </style>
 <div class="main-header">
-    <h1>🤖 Ahsan Courses Chatbot</h1>
+    <h1>🤖 Ahsan Courses AI-Chatbot</h1>
     <p>Ask about AI Automation, Data Science, Agentic AI, or Generative AI</p>
 </div>
 """, unsafe_allow_html=True)
@@ -58,7 +58,7 @@ if "chat_history" not in st.session_state:
 col1, col2 = st.columns([2.8, 1.2])
 
 with col1:
-    st.subheader("💬 Chat with AhsanBot")
+    st.subheader("💬 Chat with Ahsan AI Courses Bot")
     for role, text in st.session_state.chat_history:
         css_class = "msg-user" if role == "You" else "msg-bot"
         st.markdown(f"<div class='{css_class}'>{text}</div>", unsafe_allow_html=True)
@@ -118,7 +118,7 @@ with col2:
             r = requests.post(f"{API_URL}/chat", json=payload, timeout=15)
             if r.ok:
                 data = r.json()
-                # defensive: accept either 'reply' or 'reply' nested patterns
+            
                 reply = data.get("reply") or data.get("text") or str(data)
                 st.info(reply)
             else:
@@ -149,6 +149,6 @@ with col2:
 
 st.markdown("""
 <div class="footer">
-    Made with ❤️ by Ahsan — Powered by Gemini & Streamlit
+    Made with ❤️ by Ahsan — Powered by Gemini & Streamlit and always Ahsan
 </div>
 """, unsafe_allow_html=True)

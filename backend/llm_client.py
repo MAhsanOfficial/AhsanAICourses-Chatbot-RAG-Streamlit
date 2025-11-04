@@ -1,4 +1,3 @@
-# llm_client.py
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -12,37 +11,37 @@ def _extract_text_from_genai_resp(resp) -> str:
     """Try several common response shapes from google generative ai client."""
     if resp is None:
         return ""
-    # If it's a dict-like response with candidates
+    
     try:
         if isinstance(resp, dict):
             if "candidates" in resp and resp["candidates"]:
                 cand = resp["candidates"][0]
-                # content may be a string or list/dict
+                
                 text = cand.get("content") or cand.get("output") or cand.get("text")
                 if isinstance(text, str):
                     return text
                 if isinstance(text, list):
-                    # join parts
+                    
                     return " ".join([t.get("text", "") if isinstance(t, dict) else str(t) for t in text])
-        # Some client objects expose .text
+       
         if hasattr(resp, "text"):
             return getattr(resp, "text")
-        # As a last resort, stringify
+        
         return str(resp)
     except Exception:
         return str(resp)
 
 
 def generate_gemini_response(user_input, context):
-    # If API key is not configured, return a helpful placeholder
+    
     if os.getenv("GEMINI_API_KEY") in (None, "", "None"):
         return "[GEMINI_API_KEY not configured — set it in .env to enable live responses]"
     
     try:
-        # Configure the model
+        
         model = genai.GenerativeModel('gemini-2.5-flash')
         
-        # Create the prompt with system context and user input
+        
         prompt = f"""You are Ahsan Courses AI Chatbot assistant. You help users learn about our AI courses.
         You ONLY answer questions about these course categories:
         - AI Automation
@@ -66,7 +65,7 @@ def generate_gemini_response(user_input, context):
         User Question: {user_input}
         """
 
-        # Generate response
+        
         response = model.generate_content(
             prompt,
             generation_config=genai.types.GenerationConfig(

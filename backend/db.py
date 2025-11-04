@@ -1,12 +1,8 @@
-# backend/db.py
 from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 
-# -----------------------------
-# 🗄️ Database Setup
-# -----------------------------
 DATABASE_URL = "sqlite:///./chat_history.db"
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
@@ -14,9 +10,6 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 Base = declarative_base()
 
 
-# -----------------------------
-# 💬 Chat History Model
-# -----------------------------
 class ChatHistory(Base):
     __tablename__ = "chat_history"
 
@@ -27,9 +20,6 @@ class ChatHistory(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
-# -----------------------------
-# 🧾 Lead Model
-# -----------------------------
 class Lead(Base):
     __tablename__ = "leads"
 
@@ -41,9 +31,6 @@ class Lead(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
-# -----------------------------
-# 🧩 Dependency for FastAPI
-# -----------------------------
 def get_db():
     """Provides a database session for FastAPI routes"""
     db = SessionLocal()

@@ -1,9 +1,14 @@
 # Data Science
 
-Duration: 10 weeks
+Duration: 10 Month
 Prerequisites: Python, statistics basics
 
 Modules:
+- Python
+- OPPS
+- Numpy
+- Pandas 
+- Data Visualization
 - Data wrangling & EDA
 - Probability & statistics for ML
 - Supervised & unsupervised learning
