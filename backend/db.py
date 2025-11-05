@@ -31,6 +31,18 @@ class Lead(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
+class Enrollment(Base):
+    __tablename__ = "enrollments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String(150), nullable=False)
+    email = Column(String(150), nullable=False, index=True)
+    phone = Column(String(50), nullable=False, index=True)
+    address = Column(Text, nullable=False)
+    course = Column(String(100), nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
 def get_db():
     """Provides a database session for FastAPI routes"""
     db = SessionLocal()
